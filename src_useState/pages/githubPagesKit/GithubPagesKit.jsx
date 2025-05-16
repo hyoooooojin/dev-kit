@@ -1,16 +1,11 @@
-import React from 'react';
-import { useRef, useState } from 'react';
-import { useRecoilValue } from 'recoil'; 
-import { darkModeState } from '../../atoms/themeAtom';
+import React, { useRef, useState } from 'react';
 import './githubPagesKit.scss';
 
-const GithubPagesKit = () => {
+const GithubPagesKit = ({ isDark }) => {
   const repoInputRef = useRef();
   const username = 'hyoooooojin';
   const [commands, setCommands] = useState([]);
   const [copyStatus, setCopyStatus] = useState({});
-
-  const isDark = useRecoilValue(darkModeState); 
 
   const generate = () => {
     const repo = repoInputRef.current.value.trim();
@@ -105,20 +100,20 @@ const GithubPagesKit = () => {
       </button>
       <div style={{ marginTop: '2rem' }}>
         {commands.map((command) => (
-          <div key={command.id}>
-            <div className='title'>
-              <span className="url-name">{command.title}</span>
-              <button
-                className={`copy-btn ${copyStatus[command.id] === '☑️' ? 'copied' : ''}`}
-                onClick={() => handleCopy(command.id)}
-                data-copy={command.id}
-              >
-                {copyStatus[command.id] || 'copy'}
-              </button>
-            </div>
-            <div className={isDark ? 'pre-block preDark' : 'pre-block'}>
-              <pre id={command.id}>{command.content}</pre>
-            </div>
+          <div>
+          <div className='title'>
+            <span className="url-name">{command.title}</span>
+            <button
+              className={`copy-btn ${copyStatus[command.id] === '☑️' ? 'copied' : ''}`}
+              onClick={() => handleCopy(command.id)}
+              data-copy={command.id}
+            >
+              {copyStatus[command.id] || 'copy'}
+            </button>
+          </div>
+          <div key={command.id} className={isDark ? 'pre-block preDark' : 'pre-block'}>
+            <pre id={command.id}>{command.content}</pre>
+          </div>
           </div>
         ))}
       </div>

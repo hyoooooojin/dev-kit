@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
 import './darkModeSwitch.scss'
+import { useRecoilState } from 'recoil';
+import { darkModeState } from '../../atoms/themeAtom';
 
-const DarkModeSwitch = ({ isDark, setIsDark }) => {
+
+const DarkModeSwitch = () => {
+  const [isDark, setIsDark] = useRecoilState(darkModeState);
+
   return (
-    <label className="toggle-switch">
+    <label className="toggleSwitch">
       <input
         type="checkbox"
         checked={isDark}
@@ -14,4 +19,4 @@ const DarkModeSwitch = ({ isDark, setIsDark }) => {
   )
 }
 
-export default DarkModeSwitch
+export default DarkModeSwitch;

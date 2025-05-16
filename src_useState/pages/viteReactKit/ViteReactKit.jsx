@@ -1,9 +1,5 @@
-import React from 'react';
+import React, { useState } from "react";
 import "./viteReactKit.scss";
-import { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { darkModeState } from "../../atoms/themeAtom";
-
 
 const LIBRARIES = {
   scss: "yarn add sass -D",
@@ -12,37 +8,38 @@ const LIBRARIES = {
   "react-router-dom": "yarn add react-router-dom",
 };
 
-const ViteReactKit = () => {
-  const [projectName, setProjectName] = useState("");
-  const [selectedLibs, setSelectedLibs] = useState([]);
-  const [command, setCommand] = useState("");
-  const [copied, setCopied] = useState(false);
-  const isDark = useRecoilValue(darkModeState); // ✅ 다크모드 상태 불러오기
+const ViteReactKit = ({ isDark }) => {
+  const [projectName, setProjectName] = useState("");  // 프로젝트 이름
+  const [selectedLibs, setSelectedLibs] = useState([]); // 선택한 라이브러리
+  const [command, setCommand] = useState("");  // 생성된 명령어
+  const [copied, setCopied] = useState(false);  // 복사 상태
 
+  // 체크박스 상태 처리
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
-    setSelectedLibs((prev) =>
-      checked ? [...prev, value] : prev.filter((lib) => lib !== value)
+    setSelectedLibs(prev =>
+      checked ? [...prev, value] : prev.filter(lib => lib !== value)
     );
   };
 
+  // 명령어 생성
   const generateCommand = () => {
-    const name = projectName.trim() || "my-app";
+    const name = projectName.trim() || "my-app"; // 이름이 비었을 경우 기본값
     const commands = [`makevite ${name}`];
 
-    selectedLibs.forEach((lib) => {
+    selectedLibs.forEach(lib => {
       if (LIBRARIES[lib]) commands.push(LIBRARIES[lib]);
     });
 
     setCommand(commands.join(" && "));
-    setCopied(false);
+    setCopied(false); // 명령어 생성 후 복사 상태 리셋
   };
 
+  // 명령어 복사
   const copyCommand = () => {
     if (!command) return;
 
-    navigator.clipboard
-      .writeText(command)
+    navigator.clipboard.writeText(command)
       .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
@@ -61,35 +58,20 @@ const ViteReactKit = () => {
         <input
           type="text"
           value={projectName}
-          onChange={(e) => setProjectName(e.target.value)}
+          onChange={e => setProjectName(e.target.value)}
           placeholder="my-app"
           className={isDark ? "inputDark" : ""}
-        />
+        />  
       </div>
 
       <div className="checkbox">
-        <label>
-          <input type="checkbox" value="scss" onChange={handleCheckboxChange} />
-          SCSS
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="tailwind"
-            onChange={handleCheckboxChange}
-          />
-          Tailwind
-        </label>
-        <label>
+        <label><input type="checkbox" value="scss" onChange={handleCheckboxChange} />SCSS</label>
+        <label><input type="checkbox" value="tailwind" onChange={handleCheckboxChange} />Tailwind</label><label>
           <input type="checkbox" value="mui" onChange={handleCheckboxChange} />
           MUI
         </label>
         <label>
-          <input
-            type="checkbox"
-            value="react-router-dom"
-            onChange={handleCheckboxChange}
-          />
+          <input type="checkbox" value="react-router-dom" onChange={handleCheckboxChange} />
           React Router DOM
         </label>
       </div>
@@ -97,15 +79,11 @@ const ViteReactKit = () => {
       <div className="button-group">
         <button onClick={generateCommand}>명령어 생성</button>
         <button onClick={copyCommand}>복사</button>
-        <span className="copied" id="copiedMsg">
-          {copied && "☑️"}
-        </span>
+        <span className="copied" id="copiedMsg">{copied && "☑️"}</span>
       </div>
 
       {command && (
-        <div className={isDark ? "output outputDark" : "output"} id="output">
-          {command}
-        </div>
+        <div  className={isDark ? "output outputDark" : "output"} id="output">{command}</div>
       )}
     </div>
   );

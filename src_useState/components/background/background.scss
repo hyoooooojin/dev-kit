@@ -1,0 +1,11 @@
+.backgroundContainer {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.dark {
+    background-color: #121212;
+    color: var(--dark-text-color);
+        
+        a {color: var(--dark-text-color)}
+}
