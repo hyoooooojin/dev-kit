@@ -1,13 +1,32 @@
-# React + Vite
+🏡 homepage : https://hyoooooojin.github.io/dev-kit/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- React Router Dom으로 페이지 전환
 
-Currently, two official plugins are available:
+  📁 : 프로젝트 최상위(루트) 폴더 또는 basename /dev-kit
+  🏠 : 홈 페이지 경로 /
+  ⚡ : viteReactKit 페이지 경로 /viteReactKit
+  🐙 : githubPagesKit 페이지 경로 /githubPagesKit
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Recoil로 상태 관리
 
-## Expanding the ESLint configuration
+* 초기 개발 단계에서는 `useState`를 활용한 컴포넌트 단위 상태 관리를 사용
+* Recoil을 도입하여 상태를 전역에서 관리하도록 전환
+* props를 반복적으로 전달하는 구조를 제거
+* 데이터 흐름이 명확해지고, 상태 관리가 간결해져 코드 유지보수성의 향상
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-🏡 homepage: https://hyoooooojin.github.io/dev-kit/
+- dir 구조
+
+```
+📦 src
+  📄 main.jsx          # 앱 진입점
+  📄 App.jsx           # 라우팅 및 전역 설정
+  📄 App.css           # App 전용 스타일
+  📄 index.css         # 글로벌 스타일
+  📂 components
+    📂 background      # 공통 배경 컴포넌트
+    📂 darkModeSwitch  # 다크 모드 토글 스위치 컴포넌트
+  📂 pages
+    📂 home            # 홈페이지
+    📂 viteReactKit    # Vite + React 명령어 생성 페이지
+    📂 githubPagesKit  # GitHub Pages 명령어 생성 페이지
+```
