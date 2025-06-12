@@ -2,10 +2,10 @@
 
 - React Router Dom으로 페이지 전환
 
-  📁 : 프로젝트 최상위(루트) 폴더 또는 basename /dev-kit
-  🏠 : 홈 페이지 경로 /
-  ⚡ : viteReactKit 페이지 경로 /viteReactKit
-  🐙 : githubPagesKit 페이지 경로 /githubPagesKit
+* 📁 : 프로젝트 최상위(루트) 폴더 또는 basename /dev-kit
+* 🏠 : 홈 페이지 경로 /
+* ⚡ : viteReactKit 페이지 경로 /viteReactKit
+* 🐙 : githubPagesKit 페이지 경로 /githubPagesKit
 
 - Recoil로 상태 관리
 
